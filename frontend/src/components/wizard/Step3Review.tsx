@@ -21,18 +21,22 @@ export default function Step3Review() {
       const userRole = decoded.role; // 'Admin' or 'Kerani'
 
       // Transform payload: Role-Based Payload Verification
+      const grandTotalLocal = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+      
       let payloadDetails = items.map(item => ({
         item_id: item.itemId,
         quantity: item.quantity,
-        // Only Admin sends price
-        ...(userRole === 'Admin' ? { price: item.price } : {}) 
+        // Admin sends full object (price and total/subtotal)
+        ...(userRole === 'Admin' ? { price: item.price, subtotal: item.price * item.quantity } : {}) 
       }));
 
-      const payload = {
+      const payload: any = {
         sender_name: clientData.senderName,
         sender_address: clientData.senderAddress,
         receiver_name: clientData.receiverName,
         receiver_address: clientData.receiverAddress,
+        // Admin sends full object total
+        ...(userRole === 'Admin' ? { total_amount: grandTotalLocal } : {}),
         details: payloadDetails
       };
 
