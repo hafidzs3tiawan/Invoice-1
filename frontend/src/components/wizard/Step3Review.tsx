@@ -146,24 +146,25 @@ export default function Step3Review() {
   const grandTotalLocal = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-300 bg-white p-8 rounded-2xl border border-gray-100 shadow-lg">
-      <div className="flex justify-between items-center border-b pb-4">
-         <h3 className="text-2xl font-bold text-gray-900">Review Invoice</h3>
-         <span className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Draft</span>
-      </div>
-      
-      <div className="grid grid-cols-2 gap-8 text-sm mt-6">
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-          <h4 className="font-bold text-gray-400 uppercase tracking-wide text-xs mb-3">Sender Details</h4>
-          <p className="text-gray-900 font-semibold text-lg">{clientData.senderName}</p>
-          <p className="text-gray-600 mt-1 whitespace-pre-wrap">{clientData.senderAddress}</p>
+    <>
+      <div className="space-y-6 animate-in fade-in duration-300 bg-white p-8 rounded-2xl border border-gray-100 shadow-lg print:hidden">
+        <div className="flex justify-between items-center border-b pb-4">
+           <h3 className="text-2xl font-bold text-gray-900">Review Invoice</h3>
+           <span className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Draft</span>
         </div>
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-right">
-          <h4 className="font-bold text-gray-400 uppercase tracking-wide text-xs mb-3">Receiver Details</h4>
-          <p className="text-gray-900 font-semibold text-lg">{clientData.receiverName}</p>
-          <p className="text-gray-600 mt-1 whitespace-pre-wrap">{clientData.receiverAddress}</p>
+        
+        <div className="grid grid-cols-2 gap-8 text-sm mt-6">
+          <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+            <h4 className="font-bold text-gray-400 uppercase tracking-wide text-xs mb-3">Sender Details</h4>
+            <p className="text-gray-900 font-semibold text-lg">{clientData.senderName}</p>
+            <p className="text-gray-600 mt-1 whitespace-pre-wrap">{clientData.senderAddress}</p>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-right">
+            <h4 className="font-bold text-gray-400 uppercase tracking-wide text-xs mb-3">Receiver Details</h4>
+            <p className="text-gray-900 font-semibold text-lg">{clientData.receiverName}</p>
+            <p className="text-gray-600 mt-1 whitespace-pre-wrap">{clientData.receiverAddress}</p>
+          </div>
         </div>
-      </div>
 
       <div className="mt-8 border border-gray-200 rounded-xl overflow-hidden shadow-sm">
         <table className="min-w-full divide-y divide-gray-200">
@@ -217,6 +218,7 @@ export default function Step3Review() {
              </>
            ) : 'Submit Invoice via Zero-Trust'}
         </button>
+      </div>
       </div>
       
       {/* PRINT ONLY LAYOUT: FORMAL INVOICE FORMAT. Uses Tailwind 'hidden print:block' */}
@@ -283,6 +285,6 @@ export default function Step3Review() {
            {successData && <p className="mt-2 italic">Approved via System by User #{successData.created_by}</p>}
         </div>
       </div>
-    </div>
+    </>
   );
 }
